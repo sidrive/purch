@@ -66,8 +66,7 @@ public class AdapterPoProses extends BaseAdapter {
 
         Data data = items.get(position);
 
-        status_maga = data.getMaga();
-        status_suplier = data.getSuplier();
+        status_maga = data.getMaga();      status_suplier = data.getSuplier();
 
         id_po.setText(data.getIdpo());
         kode_sup.setText(data.getKodesup());
