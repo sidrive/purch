@@ -21,13 +21,12 @@
 
     <Button
         android:id="@+id/btncoba"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_height="wrap_content"
-        android:text="Coba"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="117dp"
+        android:text="Proses"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:layout_alignStart="@+id/btnpoproses" />
 
     <TextView
         android:id="@+id/txtcoba"
@@ -39,11 +38,20 @@
 
     <Button
         android:id="@+id/btnpoproses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btncoba"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="PO Baru"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp" />
+
+    <Button
+        android:id="@+id/btnposelesai"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="PO Selesai"
+        android:layout_marginTop="24dp"
         android:layout_below="@+id/btncoba"
-        android:layout_marginTop="26dp"
-        android:text="PO Dalam Proses" />
+        android:layout_alignStart="@+id/btncoba" />
 
 </RelativeLayout>

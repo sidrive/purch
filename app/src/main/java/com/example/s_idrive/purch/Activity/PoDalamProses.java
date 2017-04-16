@@ -113,8 +113,6 @@ public class PoDalamProses extends AppCompatActivity implements SwipeRefreshLayo
                 Intent intent = new Intent(PoDalamProses.this, EditPo.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-
-
                 return false;
             }
         });
