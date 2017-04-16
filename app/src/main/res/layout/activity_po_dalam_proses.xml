@@ -18,7 +18,26 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <include layout="@layout/content_edit_po" />
+    <include layout="@layout/content_edit_po"
+        android:id="@+id/include" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="323dp"
+        android:layout_height="111dp">
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="TextView"
+        android:textSize="@dimen/floating_label_text_size"
+        android:textStyle="bold"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        tools:textSize="18sp" />
 
 </android.support.design.widget.CoordinatorLayout>
 

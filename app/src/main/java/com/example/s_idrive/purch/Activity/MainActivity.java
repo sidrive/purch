@@ -90,7 +90,7 @@ public class MainActivity extends BaseApp {
         String name = user.get(SessionManager.jabatan);
         txtprofil.setText(Html.fromHtml("<b>" + name + "</b>"));
 
-        String url = "http://192.168.53.102/maga1/tampil.php?id="+name;
+        String url = "http://192.168.42.220:8080/maga1/tampil.php?id="+name;
 
         requestQueue = Volley.newRequestQueue(MainActivity.this);
 
