@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.s_idrive.purch.BaseApp;
+import com.example.s_idrive.purch.Util.Server;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 public class Helper extends BaseApp {
 
     /*alamat utama, silahkan disesuaikan dgn ip sobat dan nama folder sobat*/
-    public static String BASE_URL = "http://192.168.42.220:8080/maga1/";
+    public static String BASE_URL = Server.URL;
 
     /*fungsi cek kesamaan text*/
     public static boolean isCompare(EditText et1, EditText et2){

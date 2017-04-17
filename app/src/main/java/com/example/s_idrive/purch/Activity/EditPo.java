@@ -92,7 +92,7 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         list    = (ListView) findViewById(R.id.list);
 
         Bundle bundle = getIntent().getExtras();
-        kode_po = bundle.getString("data1");
+        kode_po = bundle.getString("dataPoBaru");
 
         // untuk mengisi data dari JSON ke dalam adapter
         adapter = new Adapter(EditPo.this, itemList);

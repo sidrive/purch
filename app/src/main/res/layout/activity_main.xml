@@ -20,13 +20,13 @@
 
 
     <Button
-        android:id="@+id/btncoba"
+        android:id="@+id/btnpoproses"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="117dp"
+        android:layout_marginTop="33dp"
         android:text="Proses"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btnpoproses" />
+        android:layout_below="@+id/btnpobaru"
+        android:layout_alignStart="@+id/btnpobaru" />
 
     <TextView
         android:id="@+id/txtcoba"
@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/btnpoproses"
+        android:id="@+id/btnpobaru"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="PO Baru"
@@ -50,8 +50,17 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="PO Selesai"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/btncoba"
-        android:layout_alignStart="@+id/btncoba" />
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnpoproses"
+        android:layout_alignStart="@+id/btnpoproses" />
+
+    <Button
+        android:id="@+id/btnpenawaran"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="33dp"
+        android:text="Penawaran"
+        android:layout_below="@+id/btnposelesai"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

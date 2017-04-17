@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.s_idrive.purch.Adapter.AdapterPoBaru;
 import com.example.s_idrive.purch.Adapter.AdapterPoProses;
 import com.example.s_idrive.purch.App.AppController;
 import com.example.s_idrive.purch.Data.Data;
@@ -39,13 +40,14 @@ import java.util.List;
 import java.util.Map;
 import com.example.s_idrive.purch.R;
 
-public class PoDalamProses extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener  {
+import com.example.s_idrive.purch.R;
 
- /*  Toolbar toolbarPoProses; */
+public class PoBaruActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+
     ListView list;
     SwipeRefreshLayout swipe;
     List<Data> itemList = new ArrayList<Data>();
-    AdapterPoProses adapter;
+    AdapterPoBaru adapter;
     int success;
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
@@ -55,7 +57,7 @@ public class PoDalamProses extends AppCompatActivity implements SwipeRefreshLayo
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static String url_selectpo     = Server.URL + "selectPoProses.php?id=";
+    private static String url_selectpo     = Server.URL + "selectPo.php?id=";
 
     public static final String TAG_IDPO       = "id_po";
     public static final String TAG_KODESUP     = "kode_sup";
@@ -71,19 +73,17 @@ public class PoDalamProses extends AppCompatActivity implements SwipeRefreshLayo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_po_dalam_proses);
- /*       toolbarPoProses = (Toolbar) findViewById(R.id.toolbarPoProses);
-        setSupportActionBar(toolbarPoProses);
-*/
-       // menghubungkan variablel pada layout dan pada java
+        setContentView(R.layout.activity_po_baru);
+
+        // menghubungkan variablel pada layout dan pada java
         swipe   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         list    = (ListView) findViewById(R.id.list);
 
-       Bundle bundle = getIntent().getExtras();
-       kode_po = bundle.getString("data2");
+        Bundle bundle = getIntent().getExtras();
+        kode_po = bundle.getString("data1");
 
         // untuk mengisi data dari JSON ke dalam adapter
-        adapter = new AdapterPoProses(PoDalamProses.this, itemList);
+        adapter = new AdapterPoBaru(PoBaruActivity.this, itemList);
         list.setAdapter(adapter);
 
         // menamilkan widget refresh
@@ -107,12 +107,10 @@ public class PoDalamProses extends AppCompatActivity implements SwipeRefreshLayo
                                            final int position, long id) {
                 // TODO Auto-generated method stub
                 final String idx = itemList.get(position).getIdpo();
-                final String totalpox = itemList.get(position).getTotalpo();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("id_po", idx);
-                bundle.putString("total", totalpox);
-                Intent intent = new Intent(PoDalamProses.this, DaftarPoSelesai.class);
+                bundle.putString("dataPoBaru", idx);
+                Intent intent = new Intent(PoBaruActivity.this, EditPo.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return false;

@@ -66,7 +66,7 @@ public class MainActivity extends BaseApp {
     SessionManager sessionManager;
 
     public TextView username, txtprofil, txtcoba;
-    private Button btnCoba, btnPoProses, btnPoSelesai;
+    private Button btnPoBaru, btnPoProses, btnPoSelesai;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -90,13 +90,13 @@ public class MainActivity extends BaseApp {
         String name = user.get(SessionManager.jabatan);
         txtprofil.setText(Html.fromHtml("<b>" + name + "</b>"));
 
-        String url = "http://192.168.42.220:8080/maga1/tampil.php?id="+name;
+        String urlmain = Server.URL+ "tampil.php?id="+name;
 
         requestQueue = Volley.newRequestQueue(MainActivity.this);
 
         list_data = new ArrayList<HashMap<String, String>>();
 
-        stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        stringRequest = new StringRequest(Request.Method.GET, urlmain, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -128,13 +128,13 @@ public class MainActivity extends BaseApp {
         requestQueue.add(stringRequest);
 
 
-        btnCoba = (Button) findViewById(R.id.btncoba);
-        btnCoba.setOnClickListener(new View.OnClickListener() {
+        btnPoBaru = (Button) findViewById(R.id.btnpobaru);
+        btnPoBaru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("data1", txtcoba.getText().toString());
-                Intent intent = new Intent(MainActivity.this, EditPo.class);
+                Intent intent = new Intent(MainActivity.this, PoBaruActivity.class);
                 intent.putExtras(bundle);
                 view.startAnimation(BtnAnimasi);
                 startActivity(intent);

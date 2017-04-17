@@ -5,5 +5,5 @@ package com.example.s_idrive.purch.Util;
  */
 
 public class Server {
-    public static final String URL = "http://192.168.42.220:8080/maga1/";
+    public static final String URL = "http://192.168.53.102/maga1/";
 }
