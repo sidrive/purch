@@ -25,8 +25,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity
             android:name=".Activity.EditPo"
-            android:label="@string/title_activity_edit_po"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_edit_po" />
         <activity android:name=".Activity.PoDalamProses" />
         <activity android:name=".Activity.DaftarPoActivity" />
         <activity android:name=".Activity.DaftarPoSelesai" />
