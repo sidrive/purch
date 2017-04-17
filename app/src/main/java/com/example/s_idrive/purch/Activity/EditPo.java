@@ -19,14 +19,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.s_idrive.purch.Adapter.Adapter;
 import com.example.s_idrive.purch.App.AppController;
 import com.example.s_idrive.purch.Data.Data;
@@ -58,10 +61,12 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     Integer harga;
     Integer jumlah;
     Integer total;
+    TextView txtbartotalpo, txtbaridpo;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static String url_select     = Server.URL + "select.php?id=";
+    private static String url_main    = Server.URL + "selectEditPo.php?id=FBMG170417-1119-0149";
     private static String url_insert     = Server.URL + "insert.php";
     private static String url_edit       = Server.URL + "edit.php";
     private static String url_update     = Server.URL + "update.php";
@@ -77,19 +82,24 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
 
+    private StringRequest stringRequest;
+    private RequestQueue requestQueue;
+    ArrayList<HashMap<String, String>> list_data;
+
     String tag_json_obj = "json_obj_req";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_po);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       //toolbar = (Toolbar) findViewById(R.id.toolbar);
+       //setSupportActionBar(toolbar);
 
         // menghubungkan variablel pada layout dan pada java
-        fab     = (FloatingActionButton) findViewById(R.id.fab);
-        swipe   = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        list    = (ListView) findViewById(R.id.list);
+        swipe           = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        list            = (ListView) findViewById(R.id.list);
+        txtbartotalpo   = (TextView) findViewById(R.id.textView3);
+        txtbaridpo      = (TextView) findViewById(R.id.txtbaridpo);
 
         Bundle bundle = getIntent().getExtras();
         kode_po = bundle.getString("dataPoBaru");
@@ -112,13 +122,40 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                    }
         );
 
-        // fungsi floating action button memanggil form biodata
-        fab.setOnClickListener(new View.OnClickListener() {
+        requestQueue = Volley.newRequestQueue(EditPo.this);
+
+        list_data = new ArrayList<HashMap<String, String>>();
+
+        // fungsi untuk mengambil data total dari po dan ditampilkan di textview
+        stringRequest = new StringRequest(Request.Method.GET, url_main, new Response.Listener<String>() {
             @Override
-            public void onClick(View view) {
-                DialogForm("", "", "", "", "", "SIMPAN");
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    for (int a = 0; a < jsonArray.length(); a ++){
+                        JSONObject json = jsonArray.getJSONObject(a);
+                        HashMap<String, String> map  = new HashMap<String, String>();
+                        map.put("id_po", json.getString("id_po"));
+                        map.put("kode_sup", json.getString("kode_sup"));
+                        map.put("total", json.getString("total"));
+                        list_data.add(map);
+                    }
+                    //  Glide.with(getApplicationContext())
+                    txtbartotalpo.setText(list_data.get(0).get("total"));
+                   // txtbaridpo.setText(list_data.get(0).get("id_po"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(EditPo.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        requestQueue.add(stringRequest);
 
         // listview ditekan lama akan menampilkan dua pilihan edit atau delete data
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
