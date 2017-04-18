@@ -3,6 +3,7 @@ package com.example.s_idrive.purch.Activity;
 /**
  * Created by s_idrive on 13-Apr-17.
  */
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,10 +60,9 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     View dialogView;
     EditText txt_id, txt_nama, txt_harga, txt_idpo, txt_jumlah;
     String id, idpo, nama, alamat, kode_po;
-    Integer harga;
-    Integer jumlah;
-    Integer total;
+    Integer harga, jumlah, total;
     TextView txtbartotalpo, txtbaridpo;
+    Button btnverifikasi;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -71,6 +72,7 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     private static String url_edit       = Server.URL + "edit.php";
     private static String url_update     = Server.URL + "update.php";
     private static String url_delete     = Server.URL + "delete.php";
+    private static String url_verifikasi     = Server.URL + "verifikasi.php";
 
     public static final String TAG_ID       = "id";
     public static final String TAG_IDPO       = "id_po";
@@ -100,6 +102,7 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         list            = (ListView) findViewById(R.id.list);
         txtbartotalpo   = (TextView) findViewById(R.id.txtbartotalpo);
         txtbaridpo      = (TextView) findViewById(R.id.txtbaridpo);
+        btnverifikasi   = (Button) findViewById(R.id.btnverifikasi);
 
         Bundle bundle = getIntent().getExtras();
         kode_po = bundle.getString("dataPoBaru");
@@ -122,6 +125,17 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                        }
                    }
         );
+
+        btnverifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                verifikasi();
+                panggilData();
+                callVolley();
+
+            }
+        });
 
 
         // listview ditekan lama akan menampilkan dua pilihan edit atau delete data
@@ -192,6 +206,40 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         });
 
         requestQueue.add(stringRequest);
+    }
+
+    // fungsi untuk verifikasi data
+    private void verifikasi() {
+        String url = url_verifikasi;
+        requestQueue = Volley.newRequestQueue(EditPo.this);
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // menampilkan respone
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Toast.makeText(EditPo.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {         // Menambahkan parameters post
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("id_po", kode_po);
+
+                return params;
+            }
+        };
+        requestQueue.add(postRequest);
     }
 
     @Override
@@ -314,6 +362,7 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         AppController.getInstance().addToRequestQueue(jArr);
     }
 
+
     // fungsi untuk menyimpan atau update
     private void simpan_update() {
         String url;
@@ -385,6 +434,7 @@ public class EditPo extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
 
     // fungsi untuk get edit data
     private void edit(final String idx){

@@ -9,24 +9,39 @@
 
 
     <TextView
+        android:id="@+id/txtselamat"
+        android:layout_height="wrap_content"
+        android:text="Selamat Datang : "
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/btnpenawaran" />
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_height="wrap_content"
+        android:text="Kode Suplier : "
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/txtprofil"
+        android:layout_marginStart="29dp" />
+
+    <TextView
         android:id="@+id/txtprofil"
         android:layout_height="wrap_content"
         android:text="Texprofil"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="78dp"
-        android:layout_marginBottom="14dp" />
+        android:layout_toEndOf="@+id/txtselamat" />
 
 
     <Button
         android:id="@+id/btnpoproses"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_marginTop="33dp"
-        android:text="Proses"
+        android:layout_alignStart="@+id/btnpobaru"
         android:layout_below="@+id/btnpobaru"
-        android:layout_alignStart="@+id/btnpobaru" />
+        android:layout_marginTop="33dp"
+        android:text="Proses" />
 
     <TextView
         android:id="@+id/txtcoba"
@@ -34,25 +49,25 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toEndOf="@+id/txt" />
 
     <Button
         android:id="@+id/btnpobaru"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        android:text="PO Baru"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp"
+        android:text="PO Baru" />
 
     <Button
         android:id="@+id/btnposelesai"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="50dp"
-        android:text="PO Selesai"
-        android:layout_marginTop="30dp"
+        android:layout_alignStart="@+id/btnpoproses"
         android:layout_below="@+id/btnpoproses"
-        android:layout_alignStart="@+id/btnpoproses" />
+        android:layout_marginTop="30dp"
+        android:text="PO Selesai" />
 
     <Button
         android:id="@+id/btnpenawaran"
@@ -62,5 +77,14 @@
         android:text="Penawaran"
         android:layout_below="@+id/btnposelesai"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnposelesai"
+        android:layout_below="@+id/btnpenawaran"
+        android:layout_marginTop="52dp"
+        android:text="Logout" />
 
 </RelativeLayout>

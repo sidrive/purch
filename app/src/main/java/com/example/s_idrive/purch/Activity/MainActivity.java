@@ -66,7 +66,7 @@ public class MainActivity extends BaseApp {
     SessionManager sessionManager;
 
     public TextView username, txtprofil, txtcoba;
-    private Button btnPoBaru, btnPoProses, btnPoSelesai;
+    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -164,6 +164,14 @@ public class MainActivity extends BaseApp {
                 intent.putExtras(bundle);
                 view.startAnimation(BtnAnimasi);
                 startActivity(intent);
+            }
+        });
+
+        btnlogout = (Button)findViewById(R.id.btnlogout);
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sessionManager.logout();
             }
         });
 

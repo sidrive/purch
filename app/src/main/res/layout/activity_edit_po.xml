@@ -32,12 +32,13 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button"
-            style="@android:style/Widget.Material.Button.Colored"
+            android:id="@+id/btnverifikasi"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_gravity="right"
+            android:background="@android:drawable/btn_default"
             android:text="Verifikasi"
+            android:textColor="@color/colorAccent"
             app:layout_scrollFlags="scroll" />
 
     </android.support.design.widget.AppBarLayout>
