@@ -29,7 +29,8 @@
         <activity android:name=".Activity.PoDalamProses" />
         <activity android:name=".Activity.DaftarPoActivity" />
         <activity android:name=".Activity.DaftarPoSelesai" />
-        <activity android:name=".Activity.PoBaruActivity"></activity>
+        <activity android:name=".Activity.PoBaruActivity" />
+        <activity android:name=".Activity.PenawaranActivity"></activity>
     </application>
 
 </manifest>
