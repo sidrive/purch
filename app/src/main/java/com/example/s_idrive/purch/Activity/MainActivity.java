@@ -66,7 +66,7 @@ public class MainActivity extends BaseApp {
     SessionManager sessionManager;
 
     public TextView username, txtprofil, txtcoba;
-    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout;
+    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -162,6 +162,19 @@ public class MainActivity extends BaseApp {
                 bundle.putString("data3", txtcoba.getText().toString());
                 Intent intent = new Intent(MainActivity.this, DaftarPoActivity.class);
                 intent.putExtras(bundle);
+                view.startAnimation(BtnAnimasi);
+                startActivity(intent);
+            }
+        });
+
+        btnPenawaran = (Button) findViewById(R.id.btnpenawaran);
+        btnPenawaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* Bundle bundle = new Bundle();
+                bundle.putString("data3", txtcoba.getText().toString()); */
+                Intent intent = new Intent(MainActivity.this, PenawaranActivity.class);
+               /* intent.putExtras(bundle); */
                 view.startAnimation(BtnAnimasi);
                 startActivity(intent);
             }
