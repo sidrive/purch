@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">purch</string>
+    <string name="app_name">Purchase Order</string>
     <string name="title_activity_edit_po">EditPo</string>
-    <string name="title_activity_input">InputActivity</string>
+    <string name="title_activity_input">Input Penawaran</string>
 </resources>
