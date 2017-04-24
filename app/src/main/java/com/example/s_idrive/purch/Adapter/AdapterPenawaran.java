@@ -14,58 +14,41 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.s_idrive.purch.Activity.PenawaranActivity;
+import com.example.s_idrive.purch.Helper.Helper;
+import com.example.s_idrive.purch.Holder.PenawaranHolder;
 import com.example.s_idrive.purch.R;
 import com.example.s_idrive.purch.Util.Server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdapterPenawaran extends RecyclerView.Adapter<AdapterPenawaran.ViewHolder> {
+public class AdapterPenawaran extends RecyclerView.Adapter<PenawaranHolder> {
 
+    private ArrayList<HashMap<String, String>> list_data;
     Context context;
-    ArrayList<HashMap<String, String>> list_data;
 
     public AdapterPenawaran(PenawaranActivity penawaranActivity, ArrayList<HashMap<String, String>> list_data) {
-        this.context = penawaranActivity;
         this.list_data = list_data;
+        this.context = penawaranActivity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PenawaranHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_daftar_penawaran, null);
-        return new ViewHolder(view);
+        return new PenawaranHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context)
-                .load(Server.URL+ "/img/" + list_data.get(position).get("foto"))
-                .crossFade()
-                .placeholder(R.mipmap.ic_launcher)
-                .into(holder.imgbrg);
+    public void onBindViewHolder(PenawaranHolder holder, int position) {
         holder.txtnama.setText(list_data.get(position).get("nama_brg"));
         holder.txtharga.setText(list_data.get(position).get("harga_brg"));
         holder.txtbarcode.setText(list_data.get(position).get("barcode"));
+        Glide.with(context).load(Helper.BASE_URL+ "img/" + list_data.get(position).get("foto"))
+                .crossFade().placeholder(R.mipmap.ic_launcher).into(holder.imgbrg);
     }
 
     @Override
     public int getItemCount() {
         return list_data.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtnama;
-        TextView txtharga;
-        TextView txtbarcode;
-        ImageView imgbrg;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            txtnama = (TextView) itemView.findViewById(R.id.txtnama);
-            txtharga = (TextView) itemView.findViewById(R.id.txtharga);
-            txtbarcode = (TextView) itemView.findViewById(R.id.txtbarcode);
-            imgbrg = (ImageView) itemView.findViewById(R.id.imgbrg);
-        }
     }
 }

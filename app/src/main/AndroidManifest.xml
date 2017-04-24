@@ -30,7 +30,11 @@
         <activity android:name=".Activity.DaftarPoActivity" />
         <activity android:name=".Activity.DaftarPoSelesai" />
         <activity android:name=".Activity.PoBaruActivity" />
-        <activity android:name=".Activity.PenawaranActivity"></activity>
+        <activity android:name=".Activity.PenawaranActivity" />
+        <activity
+            android:name=".Activity.InputActivity"
+            android:label="@string/title_activity_input"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

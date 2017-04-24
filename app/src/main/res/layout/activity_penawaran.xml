@@ -9,8 +9,20 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lvpenawaran"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btninput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="17dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </RelativeLayout>
