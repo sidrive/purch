@@ -66,25 +66,27 @@ public class AdapterPoBaru extends BaseAdapter {
 
         Data data = items.get(position);
 
-        status_maga = data.getMaga();      status_suplier = data.getSuplier();
+        status_maga = "Y";/*data.getMaga(); */     status_suplier = data.getSuplier();
 
         id_po.setText(data.getIdpo());
         kode_sup.setText(data.getKodesup());
         tanggal.setText("Tanggal dibuat : "+data.getTanggal());
         totalpo.setText("Total : Rp. "+data.getTotalpo());
 
-        if (status_maga == "N"){
+        if (data.getMaga().toString() == "N"){
             magastatus = "Belum Konfirmasi";
             maga.setText("Status Maga : "+magastatus);
-        } else {magastatus = "Konfirmasi";
-            maga.setText("Status Maga : "+magastatus); }
+        }if (data.getMaga().toString() == "Y"){
+            magastatus = "Konfirmasi";
+            maga.setText("Status Maga : "+magastatus);
+        }
 
-        if (status_suplier == "N"){
+        if (data.getSuplier() == "N"){
             suplierstatus = "Belum Konfirmasi";
             suplier.setText("Status Suplier : "+suplierstatus);
-        } else { suplierstatus = "Konfirmasi";
-            suplier.setText("Status Suplier " +
-                    ": "+suplierstatus);}
+        }  if (data.getSuplier() == "Y"){
+            suplierstatus = "Konfirmasi";
+            suplier.setText("Status Suplier : "+suplierstatus);}
 
 
 
