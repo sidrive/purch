@@ -67,28 +67,25 @@ public class AdapterDaftarPo extends BaseAdapter {
 
         Data data = items.get(position);
 
-        status_maga = "N";/*data.getMaga(); */     status_suplier = "N"; /*data.getSuplier();*/
+        status_maga = data.getMaga();     status_suplier = data.getSuplier();
 
         id_po.setText(data.getIdpo());
         kode_sup.setText(data.getKodesup());
         tanggal.setText("Tanggal dibuat : "+data.getTanggal());
         totalpo.setText("Total : Rp. "+data.getTotalpo());
 
-    /*    if (status_maga == "N"){
+        if (status_maga.equals("N")){
             magastatus = "Belum Konfirmasi";
             maga.setText("Status Maga : "+magastatus);
-        }if (status_maga == "Y"){
-            magastatus = "Konfirmasi";
-            maga.setText("Status Maga : "+magastatus);
-        } else {magastatus = "Eror";
+        } else {magastatus = "Konfirmasi";
             maga.setText("Status Maga : "+magastatus); }
 
-        if (status_suplier == "N"){
+        if (status_suplier.equals("N")){
             suplierstatus = "Belum Konfirmasi";
             suplier.setText("Status Suplier : "+suplierstatus);
         } else { suplierstatus = "Konfirmasi";
             suplier.setText("Status Suplier : "+suplierstatus);}
-*/
+
         return convertView;
     }
 }

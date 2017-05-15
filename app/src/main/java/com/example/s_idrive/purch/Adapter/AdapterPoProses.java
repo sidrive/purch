@@ -73,20 +73,17 @@ public class AdapterPoProses extends BaseAdapter {
         tanggal.setText("Tanggal dibuat : "+data.getTanggal());
         totalpo.setText("Total : Rp. "+data.getTotalpo());
 
-        if (status_maga == "N"){
+        if (status_maga.equals("N")){
             magastatus = "Belum Konfirmasi";
             maga.setText("Status Maga : "+magastatus);
         } else {magastatus = "Konfirmasi";
             maga.setText("Status Maga : "+magastatus); }
 
-        if (status_suplier == "N"){
+        if (status_suplier.equals("N")){
             suplierstatus = "Belum Konfirmasi";
             suplier.setText("Status Suplier : "+suplierstatus);
         } else { suplierstatus = "Konfirmasi";
-            suplier.setText("Status Suplier " +
-                    ": "+suplierstatus);}
-
-
+            suplier.setText("Status Suplier : "+suplierstatus);}
 
         return convertView;
     }
