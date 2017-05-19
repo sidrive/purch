@@ -43,6 +43,7 @@ import com.androidquery.callback.AjaxStatus;
 import com.bumptech.glide.Glide;
 import com.example.s_idrive.purch.Adapter.Adapter;
 import com.example.s_idrive.purch.Adapter.AdapterPO;
+import com.example.s_idrive.purch.AndroidService;
 import com.example.s_idrive.purch.App.AppController;
 import com.example.s_idrive.purch.BaseApp;
 import com.example.s_idrive.purch.Data.Data;
@@ -66,7 +67,7 @@ public class MainActivity extends BaseApp {
     SessionManager sessionManager;
 
     public TextView username, txtprofil, txtcoba;
-    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran;
+    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran, btnStart, btnStop;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -80,11 +81,10 @@ public class MainActivity extends BaseApp {
         setContentView(R.layout.activity_main);
 
         sessionManager = new SessionManager(getApplicationContext());
+        startService(new Intent(MainActivity.this, AndroidService.class));
 
         txtprofil = (TextView)findViewById(R.id.txtprofil);
         txtcoba = (TextView)findViewById(R.id.txtcoba);
-
-        sessionManager = new SessionManager(getApplicationContext());
 
         HashMap<String, String> user = sessionManager.getUserDetails();
         String name = user.get(SessionManager.jabatan);
