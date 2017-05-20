@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 public class AndroidService extends Service {
+    Thread t = new CheckingUpdate();
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -14,8 +15,20 @@ public class AndroidService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        // starting the thread
+        t.start();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(!t.isAlive())
+        {
+            t.start();
+        }
+
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-        return START_STICKY;
+        return Service.START_REDELIVER_INTENT;
     }
 }

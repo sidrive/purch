@@ -1,8 +1,13 @@
 package com.example.s_idrive.purch.Activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,7 +72,7 @@ public class MainActivity extends BaseApp {
     SessionManager sessionManager;
 
     public TextView username, txtprofil, txtcoba;
-    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran, btnStart, btnStop;
+    private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran, btn;
 
     private RequestQueue requestQueue;
     private StringRequest stringRequest;
@@ -126,6 +131,14 @@ public class MainActivity extends BaseApp {
         });
 
         requestQueue.add(stringRequest);
+
+        btn = (Button) findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Notify("You've received new message", "message");
+            }
+        });
 
 
         btnPoBaru = (Button) findViewById(R.id.btnpobaru);
@@ -190,6 +203,23 @@ public class MainActivity extends BaseApp {
 
     }
 
+    public void Notify(String notificationTitle, String notificationMessage){
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_stat_pesan_notif);
+        builder.setContentTitle(notificationTitle);//"Notifications Example")
+        builder.setContentText(notificationMessage);//"This is a test notification");
+        builder.setTicker("New Message Alert!");
+        builder.setSmallIcon(R.drawable.ic_stat_pesan_notif);
+
+        Intent notificationIntent = new Intent(MainActivity.this, PoBaruActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(1, builder.build());
+    }
 
 
 }

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".App.AppController"
@@ -29,7 +30,9 @@
         <activity android:name=".Activity.PoDalamProses" />
         <activity android:name=".Activity.DaftarPoActivity" />
         <activity android:name=".Activity.DaftarPoSelesai" />
-        <activity android:name=".Activity.PoBaruActivity" />
+        <activity android:name=".Activity.PoBaruActivity"
+            android:parentActivityName=".Activity.MainActivity"/>
+
         <activity android:name=".Activity.PenawaranActivity" />
         <activity
             android:name=".Activity.InputActivity"
@@ -39,7 +42,7 @@
         <service
             android:name=".AndroidService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>
