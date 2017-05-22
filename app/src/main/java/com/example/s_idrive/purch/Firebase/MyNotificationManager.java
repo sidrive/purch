@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 
@@ -80,13 +81,17 @@ public class MyNotificationManager {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mCtx);
         Notification notification;
-        notification = mBuilder.setSmallIcon(R.mipmap.ic_launcher_maga_round).setTicker(title).setWhen(0)
+        notification = mBuilder.setSmallIcon(R.drawable.ic_stat_notif_maga).setTicker(title).setWhen(0)
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent)
                 .setContentTitle(title)
-                .setSmallIcon(R.mipmap.ic_launcher_maga_round)
+                .setSmallIcon(R.drawable.ic_stat_notif_maga)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher_maga))
-                .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentText("test")
+                .setVibrate(new long[]{250, 500, 250, 500, 1000, 250, 250, 500})
+                .setLights(Color.RED, 3000, 3000)
+                .setDefaults(Notification.DEFAULT_SOUND)
                 .build();
 
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
