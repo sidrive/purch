@@ -52,6 +52,8 @@ import com.example.s_idrive.purch.AndroidService;
 import com.example.s_idrive.purch.App.AppController;
 import com.example.s_idrive.purch.BaseApp;
 import com.example.s_idrive.purch.Data.Data;
+import com.example.s_idrive.purch.Firebase.RegisterDevicesActivity;
+import com.example.s_idrive.purch.Firebase.SharedPrefManager;
 import com.example.s_idrive.purch.Helper.Helper;
 import com.example.s_idrive.purch.Model.detailPO;
 import com.example.s_idrive.purch.R;
@@ -68,10 +70,10 @@ import java.util.Map;
 
 
 
-public class MainActivity extends BaseApp {
+public class MainActivity extends BaseApp implements View.OnClickListener {
     SessionManager sessionManager;
 
-    public TextView username, txtprofil, txtcoba;
+    public TextView username, txtprofil, txtcoba, txttoken;
     private Button btnPoBaru, btnPoProses, btnPoSelesai, btnlogout, btnPenawaran, btn;
 
     private RequestQueue requestQueue;
@@ -132,11 +134,17 @@ public class MainActivity extends BaseApp {
 
         requestQueue.add(stringRequest);
 
+        txttoken = (TextView) findViewById(R.id.txttoken);
         btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Notify("You've received new message", "message");
+                Bundle bundle = new Bundle();
+                bundle.putString("data1", txtcoba.getText().toString());
+                Intent intent = new Intent(MainActivity.this, RegisterDevicesActivity.class);
+                intent.putExtras(bundle);
+                view.startAnimation(BtnAnimasi);
+                startActivity(intent);
             }
         });
 
@@ -203,7 +211,24 @@ public class MainActivity extends BaseApp {
 
     }
 
-    public void Notify(String notificationTitle, String notificationMessage){
+    @Override
+    public void onClick(View view) {
+        if (view == btn) {
+            //getting token from shared preferences
+            String token = SharedPrefManager.getInstance(this).getDeviceToken();
+
+            //if token is not null
+            if (token != null) {
+                //displaying the token
+                txttoken.setText(token);
+            } else {
+                //if token is null that means something wrong
+                txttoken.setText("Token not generated");
+            }
+        }
+    }
+
+  /*  public void Notify(String notificationTitle, String notificationMessage){
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.drawable.ic_stat_pesan_notif);
@@ -221,5 +246,5 @@ public class MainActivity extends BaseApp {
         manager.notify(1, builder.build());
     }
 
-
+*/
 }
