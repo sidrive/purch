@@ -30,6 +30,7 @@ public class RegisterDevicesActivity extends AppCompatActivity implements View.O
 
     private Button buttonRegister;
     private EditText editTextEmail;
+    private TextView txtViewToken;
     private ProgressDialog progressDialog;
 
     private static final String URL_REGISTER_DEVICE = "http://nurmuha.hostzi.com/maga1/RegisterDevice.php";
@@ -42,6 +43,7 @@ public class RegisterDevicesActivity extends AppCompatActivity implements View.O
         //getting views from xml
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        txtViewToken = (TextView) findViewById(R.id.txtToken1);
 
         //adding listener to view
         buttonRegister.setOnClickListener(this);
@@ -93,6 +95,19 @@ public class RegisterDevicesActivity extends AppCompatActivity implements View.O
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void vieToken(){
+        String token = SharedPrefManager.getInstance(this).getDeviceToken();
+
+        //if token is not null
+        if (token != null) {
+            //displaying the token
+            txtViewToken.setText(token);
+        } else {
+            //if token is null that means something wrong
+            txtViewToken.setText("Token not generated");
+        }
     }
 
     @Override
