@@ -6,28 +6,79 @@
     android:layout_height="match_parent"
     tools:context="com.example.s_idrive.purch.Firebase.RegisterDevicesActivity">
 
-    <EditText
-        android:layout_above="@+id/buttonRegister"
-        android:hint="Enter email"
-        android:id="@+id/editTextEmail"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bglogo"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bglogo"
+        android:layout_centerHorizontal="true"
+        android:text="Registrasi User"
+        android:textSize="26dp" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/regtxtPassword1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:met_baseColor="#2e8ece"
+        app:met_errorColor="#f22a37"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@android:drawable/ic_dialog_alert"
+        app:met_primaryColor="#fc1e94"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignParentStart="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/regtxtPassword2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/regtxtPassword1"
+        android:layout_marginTop="1dp"
+        android:hint="Password"
+        app:met_baseColor="#2e8ece"
+        app:met_errorColor="#f22a37"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@android:drawable/ic_dialog_alert"
+        app:met_primaryColor="#fc1e94" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        style="@android:style/Widget.Material.Light.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="29dp"
+        android:hint="Enter email"
+        app:met_iconLeft="@android:drawable/ic_dialog_email" />
 
     <Button
-        android:layout_centerVertical="true"
         android:text="Register Device"
         android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtToken1"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp" />
 
     <TextView
         android:id="@+id/txtToken1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editTextEmail"
+        android:layout_marginStart="13dp"
+        android:text="TextView"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="68dp"
-        android:layout_marginStart="83dp"
-        android:text="TextView" />
+        android:layout_marginBottom="26dp" />
 
 </RelativeLayout>

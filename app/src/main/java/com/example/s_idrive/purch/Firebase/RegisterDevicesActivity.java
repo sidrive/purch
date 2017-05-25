@@ -3,6 +3,7 @@ package com.example.s_idrive.purch.Firebase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.s_idrive.purch.Helper.Helper;
 import com.example.s_idrive.purch.R;
 import android.app.ProgressDialog;
 import android.view.View;
@@ -29,7 +30,7 @@ import java.util.Map;
 public class RegisterDevicesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonRegister;
-    private EditText editTextEmail;
+    private EditText editTextEmail, editTextPassword1, editTextPassword2;
     private TextView txtViewToken;
     private ProgressDialog progressDialog;
 
@@ -44,6 +45,8 @@ public class RegisterDevicesActivity extends AppCompatActivity implements View.O
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         txtViewToken = (TextView) findViewById(R.id.txtToken1);
+        editTextPassword2 = (EditText) findViewById(R.id.regtxtPassword2);
+        editTextPassword1 = (EditText) findViewById(R.id.regtxtPassword1);
 
         //adding listener to view
         buttonRegister.setOnClickListener(this);
@@ -51,50 +54,75 @@ public class RegisterDevicesActivity extends AppCompatActivity implements View.O
 
     //storing token to mysql server
     private void sendTokenToServer() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Registering Device...");
-        progressDialog.show();
+        editTextEmail.setError(null);
+        editTextPassword1.setError(null);
+        editTextPassword2.setError(null);
+        /*check keberadaan teks*/
+        if (Helper.isEmpty(editTextEmail)) {
+            editTextEmail.setError("Email masih kosong");
+            editTextEmail.requestFocus();
+        } else if (!Helper.isEmailValid(editTextEmail)) {
+            editTextEmail.setError("Format email salah");
+            editTextEmail.requestFocus();
+        } else if (Helper.isEmpty(editTextPassword1)) {
+            editTextPassword1.setError("Password masih kosong");
+            editTextPassword1.requestFocus();
+        } else if (Helper.isEmpty(editTextPassword2)) {
+            editTextPassword2.setError("Konfirmasi password masih kosong");
+            editTextPassword2.requestFocus();
+            /*check kesamaan password*/
+        } else if (Helper.isCompare(editTextPassword1, editTextPassword2)) {
+            editTextPassword2.setError("Password tidak cocok");
+            editTextPassword2.requestFocus();
+        } else {
 
-        final String token = SharedPrefManager.getInstance(this).getDeviceToken();
-        final String email = editTextEmail.getText().toString();
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Registering Device...");
+            progressDialog.show();
 
-        if (token == null) {
-            progressDialog.dismiss();
-            Toast.makeText(this, "Token not generated", Toast.LENGTH_LONG).show();
-            return;
-        }
+            final String token = SharedPrefManager.getInstance(this).getDeviceToken();
+            final String email = editTextEmail.getText().toString();
+            final String password = editTextPassword2.getText().toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER_DEVICE,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        progressDialog.dismiss();
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            Toast.makeText(RegisterDevicesActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Toast.makeText(RegisterDevicesActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("token", token);
-                return params;
+            if (token == null) {
+                progressDialog.dismiss();
+                Toast.makeText(this, "Token not generated", Toast.LENGTH_LONG).show();
+                return;
             }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER_DEVICE,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            progressDialog.dismiss();
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                Toast.makeText(RegisterDevicesActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.dismiss();
+                            Toast.makeText(RegisterDevicesActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("email", email);
+                    params.put("token", token);
+                    params.put("password", password);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }
     }
 
     private void vieToken(){

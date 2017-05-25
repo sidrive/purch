@@ -19,13 +19,13 @@
         android:layout_marginTop="20dp"/>
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login User"
-        android:textSize="26dp"
         android:layout_below="@id/bglogo"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView"/>
+        android:text="Registrasi User"
+        android:textSize="26dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/regtxtEmail"

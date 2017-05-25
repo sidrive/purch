@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.example.s_idrive.purch.BaseApp;
+import com.example.s_idrive.purch.Firebase.RegisterDevicesActivity;
 import com.example.s_idrive.purch.Helper.Helper;
 import com.example.s_idrive.purch.R;
 import com.example.s_idrive.purch.SessionManager;
@@ -43,7 +44,7 @@ public class LoginActivity extends BaseApp {
             @Override
             public void onClick(View view) {
                 view.startAnimation(BtnAnimasi);
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegisterDevicesActivity.class));
             }
         });
 
