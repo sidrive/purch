@@ -88,7 +88,7 @@ public class MyNotificationManager {
                 .setSmallIcon(R.drawable.ic_stat_notif_maga)
                 .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.mipmap.ic_launcher_maga))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .setContentText("test")
+                .setContentText("Maga Swalayan")
                 .setVibrate(new long[]{250, 500, 250, 500, 1000, 250, 250, 500})
                 .setLights(Color.RED, 3000, 3000)
                 .setDefaults(Notification.DEFAULT_SOUND)
