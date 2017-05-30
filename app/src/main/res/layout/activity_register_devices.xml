@@ -51,16 +51,18 @@
         app:met_iconLeft="@android:drawable/ic_dialog_alert"
         app:met_primaryColor="#fc1e94" />
 
-    <EditText
-        android:id="@+id/editTextEmail"
-        style="@android:style/Widget.Material.Light.EditText"
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="29dp"
-        android:hint="Enter email"
-        app:met_iconLeft="@android:drawable/ic_dialog_email" />
+        android:hint="Email"
+        app:met_baseColor="#2e8ece"
+        app:met_primaryColor="#fc1e94"
+        app:met_errorColor="#f22a37"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@android:drawable/ic_dialog_email"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="70dp"
+        android:id="@+id/editTextEmail"/>
 
     <Button
         android:text="Register Device"
