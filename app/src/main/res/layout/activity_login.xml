@@ -28,17 +28,17 @@
         android:id="@+id/textView"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/logtxtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        app:met_baseColor="#2e8ece"
-        app:met_primaryColor="#fc1e94"
-        app:met_errorColor="#f22a37"
-        app:met_floatingLabel="highlight"
-        app:met_iconLeft="@android:drawable/ic_dialog_email"
         android:layout_below="@id/textView"
         android:layout_marginTop="70dp"
-        android:id="@+id/logtxtEmail"/>
+        android:hint="Username"
+        app:met_baseColor="#2e8ece"
+        app:met_errorColor="#f22a37"
+        app:met_floatingLabel="highlight"
+        app:met_iconLeft="@android:drawable/ic_dialog_alert"
+        app:met_primaryColor="#fc1e94" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
